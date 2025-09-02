@@ -6,7 +6,8 @@ export class Url {
 	private _clicks: number;
 	private _createdAt: string;
 
-	constructor(originalUrl: string, shortenedUrl?: string, clicks?: number, createdAt?: string) {
+	constructor(props: { originalUrl: string, shortenedUrl?: string, clicks?: number, createdAt?: string }) {
+		const { originalUrl, shortenedUrl, clicks, createdAt } = props;
 
 		// Valida se originalUrl é valida
 		if (!originalUrl || originalUrl.trim() === '') {

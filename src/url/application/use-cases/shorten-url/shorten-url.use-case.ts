@@ -11,7 +11,12 @@ export class ShortenUrlUseCase {
     ) {}
 
     async execute(inputUrl: ShortenUrlDto): Promise<Url> {
-        const url = new Url(inputUrl.originalUrl);
+        const existingUrl = await this.urlRepository.findByOriginalUrl(inputUrl.originalUrl);
+        if (existingUrl) {
+            return existingUrl;
+        }
+
+        const url = new Url({ originalUrl: inputUrl.originalUrl });
         return this.urlRepository.create(url);
     }
 }

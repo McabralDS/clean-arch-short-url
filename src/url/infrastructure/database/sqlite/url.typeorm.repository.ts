@@ -18,7 +18,7 @@ export class UrlTypeOrmRepository implements IUrlRepository {
         urlToSave.clicks = 0;
         urlToSave.createdAt = url.createdAt;
         const createdUrl = await this.ormRepository.save(urlToSave);
-        return new Url(createdUrl.originalUrl, createdUrl.shortenedUrl, createdUrl.clicks, createdUrl.createdAt);
+        return new Url(createdUrl);
     }
 
     async findByShortenedUrl(shortenedUrl: string): Promise<Url | null> {
@@ -27,8 +27,17 @@ export class UrlTypeOrmRepository implements IUrlRepository {
             return null;
         }
 
-        return new Url(foundUrl.originalUrl, foundUrl.shortenedUrl, foundUrl.clicks, foundUrl.createdAt);
+        return new Url(foundUrl);
 
+    }
+
+    async findByOriginalUrl(originalUrl: string): Promise<Url | null> {
+        const foundUrl = await this.ormRepository.findOne({ where: { originalUrl } });
+        if (!foundUrl) {
+            return null;
+        }
+
+        return new Url(foundUrl);
     }
 
     async update(url: Url): Promise<Url> {
@@ -38,6 +47,6 @@ export class UrlTypeOrmRepository implements IUrlRepository {
         urlToSave.clicks = url.clicks;
 
         const updatedUrl = await this.ormRepository.save(urlToSave);
-        return new Url(updatedUrl.originalUrl, updatedUrl.shortenedUrl, updatedUrl.clicks, updatedUrl.createdAt);
+        return new Url(updatedUrl);
     }
 }
