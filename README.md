@@ -1,98 +1,254 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# 🔗 Clean Architecture URL Shortener
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Um encurtador de URLs moderno construído com NestJS seguindo os princípios da Clean Architecture. Este projeto demonstra uma implementação prática de arquitetura limpa com separação clara de responsabilidades entre domínio, aplicação e infraestrutura.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## 🎯 Objetivo
 
-## Description
+Este projeto foi desenvolvido para demonstrar como implementar Clean Architecture em uma aplicação real, criando um serviço de encurtamento de URLs com funcionalidades completas de tracking e estatísticas.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## ✨ Funcionalidades
 
-## Project setup
+- **🔗 Encurtamento de URLs**: Converte URLs longas em versões curtas e fáceis de compartilhar
+- **📊 Rastreamento de Cliques**: Conta automaticamente o número de acessos em cada URL encurtada
+- **📈 Estatísticas Detalhadas**: Visualize métricas completas de cada URL criada
+- **🔄 Redirecionamento Automático**: Redirecionamento HTTP 301 para a URL original
+- **✅ Validação de URLs**: Verificação automática da validade das URLs fornecidas
+- **🎲 Geração Inteligente**: Criação automática de códigos únicos entre 6-10 caracteres
 
-```bash
-$ npm install
+## 🏗️ Arquitetura
+
+O projeto segue os princípios da **Clean Architecture**, organizando o código em camadas bem definidas:
+
+```
+src/
+├── url/
+│   ├── domain/                 # 🎯 Camada de Domínio
+│   │   ├── entities/           # Entidades de negócio
+│   │   └── repositories/       # Contratos de repositório
+│   ├── application/            # 🔄 Camada de Aplicação
+│   │   └── use-cases/          # Casos de uso do sistema
+│   │       ├── shorten-url/    # Encurtar URL
+│   │       ├── redirect-to-original-url/  # Redirecionamento
+│   │       └── get-url-stats/  # Obter estatísticas
+│   └── infrastructure/         # 🔧 Camada de Infraestrutura
+│       ├── controller/         # Controladores REST
+│       ├── database/           # Persistência de dados
+│       └── url.module.ts       # Módulo NestJS
 ```
 
-## Compile and run the project
+### 📋 Camadas da Arquitetura
 
-```bash
-# development
-$ npm run start
+- **🎯 Domain Layer**: Contém as regras de negócio puras e entidades
+- **🔄 Application Layer**: Orquestra os casos de uso e fluxos da aplicação
+- **🔧 Infrastructure Layer**: Implementa detalhes técnicos como banco de dados e controllers
 
-# watch mode
-$ npm run start:dev
+## 🚀 Tecnologias
 
-# production mode
-$ npm run start:prod
+- **[NestJS](https://nestjs.com/)** - Framework Node.js progressivo
+- **[TypeScript](https://www.typescriptlang.org/)** - Superset tipado do JavaScript
+- **[TypeORM](https://typeorm.io/)** - ORM para TypeScript e JavaScript
+- **[SQLite](https://www.sqlite.org/)** - Banco de dados leve e eficiente
+- **[Better-SQLite3](https://github.com/WiseLibs/better-sqlite3)** - Driver SQLite otimizado
+
+## 📦 Instalação
+
+### Pré-requisitos
+
+- Node.js (versão 16 ou superior)
+- npm ou yarn
+
+### Passos de Instalação
+
+1. **Clone o repositório**
+   ```bash
+   git clone https://github.com/McabralDS/clean-arch-short-url.git
+   cd clean-arch-short-url
+   ```
+
+2. **Instale as dependências**
+   ```bash
+   npm install
+   ```
+
+3. **Inicie a aplicação**
+   ```bash
+   # Desenvolvimento
+   npm run start:dev
+   
+   # Produção
+   npm run build
+   npm run start:prod
+   ```
+
+4. **Acesse a aplicação**
+   ```
+   http://localhost:3000
+   ```
+
+## 🔌 API Endpoints
+
+### 📝 Criar URL Encurtada
+
+```http
+POST /
+Content-Type: application/json
+
+{
+  "originalUrl": "https://www.exemplo.com/url-muito-longa"
+}
 ```
 
-## Run tests
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+**Resposta:**
+```json
+{
+  "originalUrl": "https://www.exemplo.com/url-muito-longa",
+  "shortenedUrl": "abc123",
+  "clicks": 0,
+  "createdAt": "2025-09-02T10:30:00.000Z"
+}
 ```
 
-## Deployment
+### 🔄 Redirecionamento
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+```http
+GET /{shortenedUrl}
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+Redireciona automaticamente para a URL original e incrementa o contador de cliques.
 
-## Resources
+### 📊 Obter Estatísticas
 
-Check out a few resources that may come in handy when working with NestJS:
+```http
+GET /{shortenedUrl}/stats
+```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+**Resposta:**
+```json
+{
+  "originalUrl": "https://www.exemplo.com/url-muito-longa",
+  "shortenedUrl": "abc123",
+  "clicks": 15,
+  "createdAt": "2025-09-02T10:30:00.000Z"
+}
+```
 
-## Support
+## 🧪 Testes
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```bash
+# Testes unitários
+npm run test
 
-## Stay in touch
+# Testes e2e
+npm run test:e2e
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+# Cobertura de testes
+npm run test:cov
 
-## License
+# Modo watch
+npm run test:watch
+```
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+## 🛠️ Scripts Disponíveis
+
+```bash
+# Desenvolvimento
+npm run start:dev      # Inicia com hot reload
+npm run start:debug    # Inicia em modo debug
+
+# Build e Produção
+npm run build          # Compila o projeto
+npm run start:prod     # Inicia versão de produção
+
+# Qualidade de Código
+npm run lint           # Executa ESLint
+npm run format         # Formata código com Prettier
+
+# Testes
+npm run test           # Testes unitários
+npm run test:e2e       # Testes end-to-end
+npm run test:cov       # Cobertura de testes
+```
+
+## 📊 Banco de Dados
+
+O projeto utiliza SQLite com a seguinte estrutura:
+
+```sql
+CREATE TABLE urls (
+    shortenedUrl VARCHAR PRIMARY KEY,
+    originalUrl VARCHAR NOT NULL,
+    clicks INTEGER NOT NULL DEFAULT 0,
+    createdAt VARCHAR NOT NULL
+);
+```
+
+O banco de dados é criado automaticamente como `database.sqlite` na raiz do projeto.
+
+## 🎨 Exemplos de Uso
+
+### Via cURL
+
+```bash
+# Criar URL encurtada
+curl -X POST http://localhost:3000 \
+  -H "Content-Type: application/json" \
+  -d '{"originalUrl": "https://github.com/McabralDS/clean-arch-short-url"}'
+
+# Obter estatísticas
+curl http://localhost:3000/abc123/stats
+```
+
+### Via JavaScript/Fetch
+
+```javascript
+// Criar URL encurtada
+const response = await fetch('http://localhost:3000', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    originalUrl: 'https://github.com/McabralDS/clean-arch-short-url'
+  })
+});
+
+const shortUrl = await response.json();
+console.log(shortUrl);
+```
+
+## 🔧 Configuração
+
+### Variáveis de Ambiente
+
+```bash
+# .env (opcional)
+PORT=3000
+```
+
+### Configuração do Banco
+
+A configuração do banco está em `src/database.config.ts` e pode ser personalizada conforme necessário.
+
+## 🤝 Contribuição
+
+1. Faça um fork do projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Push para a branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request
+
+## 📝 Licença
+
+Este projeto está sob a licença UNLICENSED. Veja o arquivo `LICENSE` para mais detalhes.
+
+## 👨‍💻 Autor
+
+**McabralDS** - [GitHub](https://github.com/McabralDS)
+
+---
+
+<div align="center">
+
+**⭐ Não esqueça de dar uma estrela se este projeto te ajudou! ⭐**
+
+</div>
